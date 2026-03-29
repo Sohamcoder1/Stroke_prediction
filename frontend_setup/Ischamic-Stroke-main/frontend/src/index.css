@@ -1,0 +1,68 @@
+body {
+  font-family: Arial;
+  background-color: #f5f5f5;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+input {
+  margin-top: 10px;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Glass Card */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+button {
+  background: #00c6ff;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0072ff;
+}
+
+input {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+}
+
+.welcome {
+  margin-bottom: 10px;
+}
