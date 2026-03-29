@@ -7,28 +7,28 @@ import com.strokeai.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     @Override
     public String register(User user) {
+
+        user.setId(null); // 🔥 FIX
         user.setPassword(PasswordUtil.encryptPassword(user.getPassword()));
-        userRepo.save(user);
-        return "Register Success";
+        userRepository.save(user);
+
+        return "User registered successfully";
     }
 
     @Override
-    public String login(User user) {
+    public String login(String email, String password) {
 
-        User dbUser = userRepo.findByEmail(user.getEmail());
+        User user = userRepository.findByEmail(email).orElse(null);
 
-        if (dbUser != null &&
-                PasswordUtil.matchPassword(user.getPassword(), dbUser.getPassword())) {
+        if (user != null && PasswordUtil.matchPassword(password, user.getPassword())) {
             return "Login Success";
         }
 
@@ -36,47 +36,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
-    }
-
-    @Override
     public User getUserById(Long id) {
-        return userRepo.findById(id).orElse(null);
-    }
-
-    @Override
-    public String updateUser(Long id, User updatedUser) {
-
-        User user = userRepo.findById(id).orElse(null);
-
-        if (user != null) {
-            user.setUsername(updatedUser.getUsername());
-            user.setEmail(updatedUser.getEmail());
-            user.setPhone(updatedUser.getPhone());
-            user.setAddress(updatedUser.getAddress());
-
-            if (updatedUser.getPassword() != null) {
-                user.setPassword(
-                        PasswordUtil.encryptPassword(updatedUser.getPassword())
-                );
-            }
-
-            userRepo.save(user);
-            return "User Updated Successfully";
-        }
-
-        return "User Not Found";
-    }
-
-    @Override
-    public String deleteUser(Long id) {
-
-        if (userRepo.existsById(id)) {
-            userRepo.deleteById(id);
-            return "User Deleted Successfully";
-        }
-
-        return "User Not Found";
+        return userRepository.findById(id).orElse(null);
     }
 }

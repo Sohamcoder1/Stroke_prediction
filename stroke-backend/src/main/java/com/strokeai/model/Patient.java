@@ -1,7 +1,6 @@
 package com.strokeai.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 public class Patient {
@@ -14,12 +13,12 @@ public class Patient {
     private int age;
     private String gender;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Scan> scans;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;   // 🔥 LINKED USER
 
-    // Getters and Setters
+    // GETTERS & SETTERS
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -30,6 +29,6 @@ public class Patient {
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
 
-    public List<Scan> getScans() { return scans; }
-    public void setScans(List<Scan> scans) { this.scans = scans; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

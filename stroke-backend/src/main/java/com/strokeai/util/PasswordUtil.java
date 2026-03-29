@@ -6,13 +6,11 @@ public class PasswordUtil {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    // 🔐 Encrypt password
-    public static String encryptPassword(String rawPassword) {
-        return encoder.encode(rawPassword);
+    public static String encryptPassword(String password) {
+        return encoder.encode(password);
     }
 
-    // ✅ Match password
-    public static boolean matchPassword(String rawPassword, String encodedPassword) {
-        return encoder.matches(rawPassword, encodedPassword);
+    public static boolean matchPassword(String raw, String encoded) {
+        return encoder.matches(raw, encoded);
     }
 }
